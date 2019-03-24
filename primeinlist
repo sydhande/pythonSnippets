@@ -1,0 +1,70 @@
+def checkprime(i):
+    if i>1:
+        prime= True
+        for j in range(2,(i//2)+1):
+            if i%j==0:
+                prime=False
+                break
+        return prime
+    return False
+
+
+
+def primepartition(m):
+    for y in range(2,(m//2)+1):
+        if(checkprime(y)==True):
+            num = m-y
+            if(checkprime(num) == True):
+                return True
+                break
+    return False
+    
+def nestingdepth(s):
+    depth=0
+    openining = 0
+    closing = 0
+    for i in s:
+        if i=='(':
+            depth+=1
+            openining += 1
+            openining = openining - closing
+            closing = 0
+        if i==')':
+            if depth==0:
+                return -1
+            depth-=1
+            closing += 1
+    if depth==0:
+        return openining
+    return -1
+  
+def rotatelist(l, k):
+    w = l[0:]
+    for i in range(0,k):
+        ele = w.pop(0)
+        w.append(ele)
+    return w   
+import ast
+
+def parse(inp):
+  inp = ast.literal_eval(inp)
+  return (inp)
+
+fncall = input()
+lparen = fncall.find("(")
+rparen = fncall.rfind(")")
+fname = fncall[:lparen]
+farg = fncall[lparen+1:rparen]
+
+if fname == "primepartition":
+  arg = parse(farg)
+  print(primepartition(arg))
+
+if fname == "nestingdepth":
+  arg = parse(farg)
+  print(nestingdepth(arg))
+
+if fname == "rotatelist":
+  (arg1,arg2) = parse(farg)
+  print(rotatelist(arg1,arg2))
+s
